@@ -8,6 +8,8 @@ namespace Curated.Api.Data
     {
         public DbSet<YouTubeVideoCollection> YouTubeVideoCollections { get; private set; }
         public DbSet<YouTubeVideoItem> YouTubeVideoItems { get; private set; }
+        public DbSet<DigitalAsset> DigitalAssets { get; private set; }
+        public DbSet<User> Users { get; private set; }
         public CuratedDbContext(DbContextOptions options)
             :base(options) { }
 

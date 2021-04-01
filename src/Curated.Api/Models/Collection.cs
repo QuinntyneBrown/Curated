@@ -7,7 +7,8 @@ namespace Curated.Api.Models
         where T: CollectionItem
     {
         public List<T> Items { get; } = new List<T>();
-        public DateTime Created { get; private set; } = DateTime.UtcNow;
-        public DateTime? Deleted { get; private set; }
+        public DateTime Created { get; protected set; } = DateTime.UtcNow;
+        public DateTime? Deleted { get; protected set; }
+        public string CoverImageUrl { get; protected set; }
     }
 }

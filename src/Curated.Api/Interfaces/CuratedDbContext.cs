@@ -9,6 +9,8 @@ namespace Curated.Api.Interfaces
     {
         DbSet<YouTubeVideoCollection> YouTubeVideoCollections { get; }
         DbSet<YouTubeVideoItem> YouTubeVideoItems { get; }
+        DbSet<DigitalAsset> DigitalAssets { get; }
+        DbSet<User> Users { get; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
         
     }
