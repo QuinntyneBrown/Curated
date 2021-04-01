@@ -10,16 +10,16 @@ using Curated.Api.Interfaces;
 
 namespace Curated.Api.Features
 {
-    public class RemoveYouTubeVideo
+    public class RemoveYouTubeVideoItem
     {
         public class Request: IRequest<Response>
         {
-            public Guid YouTubeVideoId { get; set; }
+            public Guid YouTubeVideoItemId { get; set; }
         }
 
         public class Response: ResponseBase
         {
-            public YouTubeVideoDto YouTubeVideo { get; set; }
+            public YouTubeVideoItemDto YouTubeVideoItem { get; set; }
         }
 
         public class Handler: IRequestHandler<Request, Response>
@@ -31,15 +31,15 @@ namespace Curated.Api.Features
         
             public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
             {
-                var youTubeVideo = await _context.YouTubeVideos.SingleAsync(x => x.YouTubeVideoId == request.YouTubeVideoId);
+                var youTubeVideoItem = await _context.YouTubeVideoItems.SingleAsync(x => x.YouTubeVideoItemId == request.YouTubeVideoItemId);
                 
-                _context.YouTubeVideos.Remove(youTubeVideo);
+                _context.YouTubeVideoItems.Remove(youTubeVideoItem);
                 
                 await _context.SaveChangesAsync(cancellationToken);
                 
                 return new Response()
                 {
-                    YouTubeVideo = youTubeVideo.ToDto()
+                    YouTubeVideoItem = youTubeVideoItem.ToDto()
                 };
             }
             

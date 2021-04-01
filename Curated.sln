@@ -9,6 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Curated.Api", "src\Curated.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{05951284-E3AB-4FAC-8369-A38D1EF14BBB}"
 	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
 		clisettings.json = clisettings.json
 	EndProjectSection
 EndProject

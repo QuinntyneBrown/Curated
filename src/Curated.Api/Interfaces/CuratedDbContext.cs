@@ -8,7 +8,7 @@ namespace Curated.Api.Interfaces
     public interface ICuratedDbContext
     {
         DbSet<YouTubeVideoCollection> YouTubeVideoCollections { get; }
-        DbSet<YouTubeVideo> YouTubeVideos { get; }
+        DbSet<YouTubeVideoItem> YouTubeVideoItems { get; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
         
     }

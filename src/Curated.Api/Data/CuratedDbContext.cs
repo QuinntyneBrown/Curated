@@ -7,7 +7,7 @@ namespace Curated.Api.Data
     public class CuratedDbContext: DbContext, ICuratedDbContext
     {
         public DbSet<YouTubeVideoCollection> YouTubeVideoCollections { get; private set; }
-        public DbSet<YouTubeVideo> YouTubeVideos { get; private set; }
+        public DbSet<YouTubeVideoItem> YouTubeVideoItems { get; private set; }
         public CuratedDbContext(DbContextOptions options)
             :base(options) { }
 

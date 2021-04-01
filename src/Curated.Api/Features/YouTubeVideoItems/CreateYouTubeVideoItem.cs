@@ -2,32 +2,32 @@ using FluentValidation;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
+using Curated.Api.Models;
 using Curated.Api.Core;
 using Curated.Api.Interfaces;
-using Microsoft.EntityFrameworkCore;
 
 namespace Curated.Api.Features
 {
-    public class UpdateYouTubeVideo
+    public class CreateYouTubeVideoItem
     {
         public class Validator: AbstractValidator<Request>
         {
             public Validator()
             {
-                RuleFor(request => request.YouTubeVideo).NotNull();
-                RuleFor(request => request.YouTubeVideo).SetValidator(new YouTubeVideoValidator());
+                RuleFor(request => request.YouTubeVideoItem).NotNull();
+                RuleFor(request => request.YouTubeVideoItem).SetValidator(new YouTubeVideoItemValidator());
             }
         
         }
 
         public class Request: IRequest<Response>
         {
-            public YouTubeVideoDto YouTubeVideo { get; set; }
+            public YouTubeVideoItemDto YouTubeVideoItem { get; set; }
         }
 
         public class Response: ResponseBase
         {
-            public YouTubeVideoDto YouTubeVideo { get; set; }
+            public YouTubeVideoItemDto YouTubeVideoItem { get; set; }
         }
 
         public class Handler: IRequestHandler<Request, Response>
@@ -39,13 +39,15 @@ namespace Curated.Api.Features
         
             public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
             {
-                var youTubeVideo = await _context.YouTubeVideos.SingleAsync(x => x.YouTubeVideoId == request.YouTubeVideo.YouTubeVideoId);
+                var youTubeVideoItem = new YouTubeVideoItem();
+                
+                _context.YouTubeVideoItems.Add(youTubeVideoItem);
                 
                 await _context.SaveChangesAsync(cancellationToken);
                 
                 return new Response()
                 {
-                    YouTubeVideo = youTubeVideo.ToDto()
+                    YouTubeVideoItem = youTubeVideoItem.ToDto()
                 };
             }
             

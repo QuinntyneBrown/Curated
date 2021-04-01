@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Curated.Api.Features
 {
-    public class GetYouTubeVideosPage
+    public class GetYouTubeVideoItemsPage
     {
         public class Request: IRequest<Response>
         {
@@ -23,7 +23,7 @@ namespace Curated.Api.Features
         public class Response: ResponseBase
         {
             public int Length { get; set; }
-            public List<YouTubeVideoDto> Entities { get; set; }
+            public List<YouTubeVideoItemDto> Entities { get; set; }
         }
 
         public class Handler: IRequestHandler<Request, Response>
@@ -35,18 +35,18 @@ namespace Curated.Api.Features
         
             public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
             {
-                var query = from youTubeVideo in _context.YouTubeVideos
-                    select youTubeVideo;
+                var query = from youTubeVideoItem in _context.YouTubeVideoItems
+                    select youTubeVideoItem;
                 
-                var length = await _context.YouTubeVideos.CountAsync();
+                var length = await _context.YouTubeVideoItems.CountAsync();
                 
-                var youTubeVideos = await query.Page(request.Index, request.PageSize)
+                var youTubeVideoItems = await query.Page(request.Index, request.PageSize)
                     .Select(x => x.ToDto()).ToListAsync();
                 
                 return new()
                 {
                     Length = length,
-                    Entities = youTubeVideos
+                    Entities = youTubeVideoItems
                 };
             }
             
